@@ -3,6 +3,7 @@ package com.think.common;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import com.think.core.net.server.IOStatistics;
 import com.think.util.EventLoopUtil;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -116,5 +117,17 @@ public abstract class AbstractServer implements Server {
 			channel.close();
 			channel = null;
 		}
+	}
+	
+	@Override
+	public IOStatistics getIOStatistics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ServerConfig getServerConfig() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
