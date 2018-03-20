@@ -16,7 +16,7 @@ import io.netty.channel.Channel;
  */
 public final class Session implements Serializable {
   private static final long serialVersionUID = -4950161575479529827L;
-  public int sessionId;
+  public long sessionId;
   public transient Channel ioChannel;
   public int userId;
   public int accountId;

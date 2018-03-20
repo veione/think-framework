@@ -32,9 +32,7 @@ public abstract class ThreadSafeActor extends UntypedAbstractActor implements Ac
 
 	@Override
 	public void preRestart(Throwable reason, Optional<Object> msg) throws Exception {
-		onPreAfterReStart();
 		super.preRestart(reason, msg);
-		onPreBeforeReStart();
 	}
 
 	@Override
