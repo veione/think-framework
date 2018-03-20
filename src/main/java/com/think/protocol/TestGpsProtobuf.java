@@ -2,7 +2,6 @@ package com.think.protocol;
 
 import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.FileDescriptor;
-import com.google.protobuf.Descriptors.GenericDescriptor;
 import com.google.protobuf.DynamicMessage;
 import java.util.HashMap;
 import java.util.Map;

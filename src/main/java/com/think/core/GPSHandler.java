@@ -2,18 +2,21 @@ package com.think.core;
 
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.InvalidProtocolBufferException;
+
 import com.think.protocol.Gps;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GPSHandler extends AbstractHandler<Gps.gps_data> {
+public class GPSHandler extends AbstractHandler {
 
     @Override
     public void onHandler() {
-        this.request.getDataTime();
+        this.request.toByteArray();
         System.out.println(this.request);
         System.out.println(this.session);
+        GeneratedMessage msg;
+        System.out.println(request instanceof Gps.gps_data);
     }
 
     public static void main(String[] args) throws InvalidProtocolBufferException {
@@ -36,13 +39,13 @@ public class GPSHandler extends AbstractHandler<Gps.gps_data> {
 
 
         byte[] datas = gps_builder.build().toByteArray();
-        GeneratedMessage message = null;
-
+        GeneratedMessage message;
 
 
         if (100 == 100) {
             message = Gps.gps_data.parseFrom(datas);
         }
+        System.out.println(message instanceof Gps.gps_data);
         AbstractHandler handler = handlerMap.get(100);
         handler.init(message, session);
 
