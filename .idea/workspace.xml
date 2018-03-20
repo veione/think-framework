@@ -1,97 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e0c9a4d-ab54-4c3f-b653-aeb2854e9e68" name="Default" comment="custom protobuf message">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/think/exception/IllegalProtocolException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/think/service/StoreService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/protoc/protocol/PersonProtos.proto" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/protocol-mapping.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/Client.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/CustomProtobufDecoder.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/MessageManager.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/ProtobufClientHandler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/ProtobufServerHandler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/think/core/net/ServerMain.java" />
+    <list default="true" id="0e0c9a4d-ab54-4c3f-b653-aeb2854e9e68" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/think/core/AbstractHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/think/core/AbstractHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/think/core/GPSHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/think/core/GPSHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/think/protocol/TestGpsProtobuf.java" afterPath="$PROJECT_DIR$/src/main/java/com/think/protocol/TestGpsProtobuf.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/protoc/protocol/gps.proto" afterPath="$PROJECT_DIR$/src/main/resources/protoc/protocol/gps.proto" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/AbstractModule.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/AbstractModule.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/ActorFactory.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/ActorFactory.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/DataMap.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/DataMap.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/Manager.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/Manager.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/Module.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/Module.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/ModuleManager.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/ModuleManager.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/StoreModule.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/StoreModule.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/ThinkThreadFactory.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/ThinkThreadFactory.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/annotations/Controller.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/annotations/Controller.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/annotations/RequestMapping.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/annotations/RequestMapping.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/annotations/RequestParam.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/annotations/RequestParam.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/annotations/ResponseBody.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/annotations/ResponseBody.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/HttpConstants.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/HttpConstants.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/RequestMethod.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/RequestMethod.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/ResponseCode.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/constant/http/ResponseCode.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/AbstractConfig.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/AbstractConfig.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/Config.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/Config.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/ConfigLoader$Model.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/ConfigLoader$Model.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/ConfigLoader.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/ConfigLoader.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/factory/ParserFactory.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/factory/ParserFactory.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/impl/JsonConfigImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/impl/JsonConfigImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/impl/PropertiesConfigImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/impl/PropertiesConfigImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/impl/SystemConfigImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/impl/SystemConfigImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/impl/YamlConfigImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/impl/YamlConfigImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/parser/ConfigParser.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/parser/ConfigParser.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/parser/JsonParser.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/parser/JsonParser.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/parser/PropertiesParser.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/parser/PropertiesParser.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/config/parser/YamlParser.class" afterPath="$PROJECT_DIR$/target/classes/com/think/config/parser/YamlParser.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/Event.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/Event.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/Session.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/Session.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/actor/ActorLifeCycle.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/actor/ActorLifeCycle.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/actor/BattleHandler.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/actor/BattleHandler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/actor/ThreadSafeActor.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/actor/ThreadSafeActor.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/actor/WorldHandler.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/actor/WorldHandler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/Server.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/Server.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/codec/Codec.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/codec/Codec.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/handler/SocketMessageHandler.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/handler/SocketMessageHandler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/message/Message.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/message/Message.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer$1.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer$2.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/AbstractServer.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/HttpServer$1.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/HttpServer$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/HttpServer.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/HttpServer.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/ServerConfig.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/ServerConfig.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/SocketServer$1.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/SocketServer$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/SocketServer.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/SocketServer.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/WebSocketServer$1.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/WebSocketServer$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/server/WebSocketServer.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/server/WebSocketServer.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/util/IOStatistics.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/util/IOStatistics.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/core/net/util/MonitorServerTask.class" afterPath="$PROJECT_DIR$/target/classes/com/think/core/net/util/MonitorServerTask.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/exception/SerializeException.class" afterPath="$PROJECT_DIR$/target/classes/com/think/exception/SerializeException.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/EloRating.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/EloRating.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/EventLoopUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/EventLoopUtil.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/GameUUID.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/GameUUID.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/GsonUtil$1.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/GsonUtil$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/GsonUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/GsonUtil.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/HierarchicalTimerWheel.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/HierarchicalTimerWheel.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/PropertiesUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/PropertiesUtil.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/SerializeUtils.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/SerializeUtils.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/TimeUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/TimeUtil.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel$Timer.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel$Timer.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel$TimerState.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel$TimerState.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/TimerWheel.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/concurrent/NanoClock.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/concurrent/NanoClock.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/think/util/concurrent/SystemNanoClock.class" afterPath="$PROJECT_DIR$/target/classes/com/think/util/concurrent/SystemNanoClock.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j2.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/DataMapTest$Student.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/DataMapTest$Student.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/DataMapTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/DataMapTest.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTest.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2$Scene.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2$Scene.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2.class" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/util/TimerWheelTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/util/TimerWheelTest.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -691,12 +602,20 @@
       <workItem from="1521517912088" duration="595000" />
       <workItem from="1521518536547" duration="114000" />
       <workItem from="1521518677903" duration="3245000" />
-      <workItem from="1521550779114" duration="7962000" />
+      <workItem from="1521550779114" duration="8388000" />
     </task>
+    <task id="LOCAL-00001" summary="custom protobuf message">
+      <created>1521559973366</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1521559973366</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12099000" />
+    <option name="totallyTimeSpent" value="12525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
