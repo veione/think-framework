@@ -39,6 +39,7 @@ public class GPSHandler extends AbstractHandler {
 
 
         byte[] datas = gps_builder.build().toByteArray();
+        System.out.println("length = [" + datas.length + "]");
         GeneratedMessage message;
 
 
