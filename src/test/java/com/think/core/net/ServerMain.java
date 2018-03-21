@@ -37,10 +37,11 @@ public class ServerMain {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new ProtobufVarint32FrameDecoder())
+                            ch.pipeline()./*addLast(new ProtobufVarint32FrameDecoder())
                                     .addLast(new ProtobufDecoder(PersonProtos.Person.getDefaultInstance()))
                                     .addLast(new ProtobufVarint32LengthFieldPrepender())
-                                    .addLast(new ProtobufEncoder())
+                                    .addLast(new ProtobufEncoder())*/
+                                    addLast(new CustomProtobufDecoder())
                                     .addLast(new ProtobufServerHandler());//自定义handler
                         }
                     }).childOption(ChannelOption.TCP_NODELAY, true);

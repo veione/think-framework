@@ -6,6 +6,12 @@ import com.google.protobuf.MessageLite;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 消息管理器
+ *
+ * @author veione
+ * @date 2018年3月21日21:01:30
+ */
 public final class MessageManager {
     private static final Map<Integer, Message> MSG_MAP = new HashMap<>();
 
@@ -19,21 +25,22 @@ public final class MessageManager {
     /**
      * 添加消息至集合中
      */
-    public static void add(Integer msgId, Message msg) {
-        // TODO 添加消息
+    public static Message register(Integer msgId, Message msg) {
+        return MSG_MAP.put(msgId, msg);
     }
 
     /**
      * 从消息列表中移除该消息
      */
-    public static void remove(Integer msgId) {
-        // TODO 根据消息ID移除消息
+    public static Message remove(Integer msgId) {
+        return MSG_MAP.remove(msgId);
     }
 
     /**
      * 消息列表中是否包含该消息
      */
-    public static boolean contain(Integer msgId) {
+    public static boolean contains(Integer msgId) {
+        //MSG_MAP.values().stream().mapToInt(v->v.getSerializedSize()).max();
         return MSG_MAP.containsKey(msgId);
     }
 

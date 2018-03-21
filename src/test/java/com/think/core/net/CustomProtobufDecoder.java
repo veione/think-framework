@@ -35,17 +35,34 @@ public class CustomProtobufDecoder extends MessageToMessageDecoder<ByteBuf> {
         final byte[] array;
         final int offset;
         final int length = msg.readableBytes();
-        final Message prototype = MessageManager.get(100);
+        final Message prototype;
+        final RequestWrapper context;
 
-        if (prototype == null) {
-            throw new IllegalProtocolException();
-        }
+        if (length >= 10 && checksum(msg)) {
+            int msgId = msg.readInt();
+            prototype = MessageManager.get(msgId);
+            if (prototype == null) {
+                throw new IllegalProtocolException();
+            } else {
+                context = RequestWrapper.newBuilder();
+                context.setRequestType(msgId);
 
-        if (msg.readableBytes() >= 10 && checksum(msg)) {
+                if (msg.hasArray()) {
+                    array = msg.array();
+                    offset = msg.arrayOffset() + msg.readerIndex();
+                } else {
+                    array = new byte[length];
+                    msg.getBytes(msg.readerIndex(), array, 0, length);
+                    offset = 0;
+                }
 
-            Message message = prototype.newBuilderForType().mergeFrom(msg.array(),
-                    msg.arrayOffset() + msg.readerIndex(),
-                    msg.readableBytes() - 4).build();
+                if (HAS_PARSER) {
+                    context.setRequest(prototype.getParserForType().parseFrom(array, offset, length));
+                } else {
+                    context.setRequest(prototype.newBuilderForType().mergeFrom(array, offset, length).build());
+                }
+                out.add(context);
+            }
         }
         //https://www.ibm.com/developerworks/cn/linux/l-cn-gpb/
         //https://github.com/chenshuo/muduo-protorpc/blob/cpp11/java/src/main/java/com/chenshuo/muduo/codec/ProtobufDecoder.java
@@ -53,21 +70,6 @@ public class CustomProtobufDecoder extends MessageToMessageDecoder<ByteBuf> {
         //http://www.360doc.com/content/16/0129/15/15099545_531481464.shtml
         //https://www.cnblogs.com/sidesky/p/6913109.html
         //https://www.cnblogs.com/carl10086/p/6195568.html
-
-        if (msg.hasArray()) {
-            array = msg.array();
-            offset = msg.arrayOffset() + msg.readerIndex();
-        } else {
-            array = new byte[length];
-            msg.getBytes(msg.readerIndex(), array, 0, length);
-            offset = 0;
-        }
-
-        if (HAS_PARSER) {
-            out.add(prototype.getParserForType().parseFrom(array, offset, length));
-        } else {
-            out.add(prototype.newBuilderForType().mergeFrom(array, offset, length).build());
-        }
     }
 
 
