@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e0c9a4d-ab54-4c3f-b653-aeb2854e9e68" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/think/service/SessionManager.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/think/util/IdWorker.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/server.properties" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/think/protocol/TestGpsProtobuf.java" afterPath="$PROJECT_DIR$/src/main/java/com/think/protocol/TestGpsProtobuf.java" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/AbstractModule.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/AbstractModule.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/ActorFactory.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/ActorFactory.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/think/common/DataMap.class" afterPath="$PROJECT_DIR$/target/classes/com/think/common/DataMap.class" />
@@ -83,7 +74,6 @@
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2$Scene.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2$Scene.class" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/core/RateTests2.class" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/think/util/TimerWheelTest.class" afterPath="$PROJECT_DIR$/target/test-classes/com/think/util/TimerWheelTest.class" />
-      <change beforePath="$PROJECT_DIR$/think-framework.iml" afterPath="$PROJECT_DIR$/think-framework.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -647,7 +637,7 @@
       <workItem from="1521518536547" duration="114000" />
       <workItem from="1521518677903" duration="3245000" />
       <workItem from="1521550779114" duration="8388000" />
-      <workItem from="1521681682843" duration="17574000" />
+      <workItem from="1521681682843" duration="17641000" />
     </task>
     <task id="LOCAL-00001" summary="custom protobuf message">
       <created>1521559973366</created>
@@ -663,11 +653,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521628362999</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="modify protobuf">
+      <created>1521717176173</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1521717176173</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37429000" />
+    <option name="totallyTimeSpent" value="37496000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
