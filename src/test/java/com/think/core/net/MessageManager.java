@@ -1,7 +1,9 @@
 package com.think.core.net;
 
 import com.google.protobuf.Message;
-import com.google.protobuf.MessageLite;
+
+import com.think.config.Config;
+import com.think.config.ConfigLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +17,48 @@ import java.util.Map;
 public final class MessageManager {
     private static final Map<Integer, Message> MSG_MAP = new HashMap<>();
 
+    private static class MessageMappingModel {
+        private short msgId;
+        private String clzz;
+
+        public MessageMappingModel(short msgId, String clzz) {
+            this.msgId = msgId;
+            this.clzz = clzz;
+        }
+
+        public short getMsgId() {
+            return msgId;
+        }
+
+        public void setMsgId(short msgId) {
+            this.msgId = msgId;
+        }
+
+        public String getClzz() {
+            return clzz;
+        }
+
+        public void setClzz(String clzz) {
+            this.clzz = clzz;
+        }
+
+        @Override
+        public String toString() {
+            return "MessageMappingModel{" +
+                    "msgId=" + msgId +
+                    ", clzz='" + clzz + '\'' +
+                    '}';
+        }
+    }
+
     /**
      * 从配置文件中加载消息
      */
     public static void load(String conf) {
         // TODO 从配置文件中加载消息
+        Config config = ConfigLoader.load(conf);
+        MessageMappingModel model = config.toBean(MessageMappingModel.class);
+
     }
 
     /**

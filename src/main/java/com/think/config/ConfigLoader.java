@@ -17,7 +17,6 @@ public final class ConfigLoader {
   /**
    * 默认加载系统配置
    * 
-   * @param conf
    * @return
    */
   public static Config load() {
