@@ -136,8 +136,6 @@ public class TestGpsProtobuf {
         System.out.println("===================");
         System.out.println(msg);
         System.out.println("===================");
-
-
     }
 
 
