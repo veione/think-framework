@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -136,6 +137,15 @@ public class TestGpsProtobuf {
         System.out.println("===================");
         System.out.println(msg);
         System.out.println("===================");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("20", "20");
+        Optional<String> optional = map.entrySet().stream().filter(e -> e.getValue() == "30").map(e -> e.getKey()).findFirst();
+        if (optional.isPresent()) {
+            System.out.println("teamId = [" + optional.get() + "]");
+        } else {
+            System.out.println("Not found teamId");
+        }
 
 
     }
