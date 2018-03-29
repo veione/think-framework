@@ -1,6 +1,5 @@
 package com.think.core;
 
-import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.MessageLite;
 
 /**

@@ -1,7 +1,9 @@
 package com.think.core;
 
+import com.google.protobuf.Descriptors;
 import com.google.protobuf.GeneratedMessage;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -12,12 +14,26 @@ public class HandlerModel {
     private String clazzDesc;
     private Method method;
     private String methodDesc;
+    private int requestId;
     private GeneratedMessage request;
     private Class<? extends GeneratedMessage> message;
     private RequestContext context;
+    private MessageMapping msgMapping;
 
-    public void execute() throws Exception {
-        this.method.invoke(clazz, context, request);
+    public MessageMapping getMsgMapping() {
+        return msgMapping;
+    }
+
+    public void setMsgMapping(MessageMapping msgMapping) {
+        this.msgMapping = msgMapping;
+    }
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 
     public Class<? extends GeneratedMessage> getMessage() {
@@ -87,7 +103,35 @@ public class HandlerModel {
                 '}';
     }
 
-    class HandlerMethod {
+    public static class MessageMapping {
+        private Descriptors.Descriptor descriptor;
+        private Object msgBuilderCls;
+        private Field[] msgFields;
 
+        public Descriptors.Descriptor getDescriptor() {
+            return descriptor;
+        }
+
+        public void setDescriptor(Descriptors.Descriptor descriptor) {
+            this.descriptor = descriptor;
+        }
+
+        public Object getMsgBuilderCls() {
+            return msgBuilderCls;
+        }
+
+        public void setMsgBuilderCls(Object msgBuilderCls) {
+            this.msgBuilderCls = msgBuilderCls;
+        }
+
+        public Field[] getMsgFields() {
+            return msgFields;
+        }
+
+        public void setMsgFields(Field[] msgFields) {
+            this.msgFields = msgFields;
+        }
     }
+
 }
+

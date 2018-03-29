@@ -13,6 +13,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Mapping {
     /**
+     * 消息请求ID
+     */
+    int requestId() default 0;
+
+    /**
      * 方法说明
      */
     String desc() default "";
@@ -20,5 +25,5 @@ public @interface Mapping {
     /**
      * 指定消息请求类
      */
-    Class<? extends GeneratedMessage> request();
+    Class<? extends GeneratedMessage> msg();
 }
