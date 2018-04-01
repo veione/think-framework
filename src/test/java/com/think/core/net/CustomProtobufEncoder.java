@@ -2,6 +2,8 @@ package com.think.core.net;
 
 import com.google.common.collect.Lists;
 
+import com.think.core.net.message.ResponseWrapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +21,11 @@ public class CustomProtobufEncoder extends MessageToByteEncoder<Object> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) throws Exception {
         if (msg instanceof List) {
-            List<ResponseWrapper> responseList = (List) msg;
+            List<com.think.core.net.message.ResponseWrapper> responseList = (List) msg;
             sendMessage(ctx, out, responseList);
-        } else if (msg instanceof ResponseWrapper) {
-            List<ResponseWrapper> responseList = Lists.newArrayList();
-            responseList.add((ResponseWrapper) msg);
+        } else if (msg instanceof com.think.core.net.message.ResponseWrapper) {
+            List<com.think.core.net.message.ResponseWrapper> responseList = Lists.newArrayList();
+            responseList.add((com.think.core.net.message.ResponseWrapper) msg);
             sendMessage(ctx, out, responseList);
         }
     }
@@ -38,12 +40,12 @@ public class CustomProtobufEncoder extends MessageToByteEncoder<Object> {
     private void sendMessage(ChannelHandlerContext ctx, ByteBuf out, List<ResponseWrapper> responseList) {
         List<ByteBuf> respBufList = Lists.newArrayList();
         responseList.forEach((ResponseWrapper resp) -> {
-            byte[] responseBody = resp.getResponseBody();
+            byte[] responseBody = resp.getPayload().toByteArray();
             ByteBuf buf = ctx.alloc().buffer();
             if (responseBody.length >= 10240) {
-                logger.warn(">>>>>> The message {} is too large, please check <<<<<<", resp.getResponse().getDescriptorForType().getFullName());
+                logger.warn(">>>>>> The message {} is too large, please check <<<<<<", resp.getPayload().getParserForType().getClass().getName());
             }
-            buf.writeInt(resp.getResponseType());
+            buf.writeShort(resp.getResponseId());
             buf.writeBytes(responseBody);
             respBufList.add(buf);
         });

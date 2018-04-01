@@ -2,7 +2,7 @@ package com.think.test.refrelect;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import com.esotericsoftware.reflectasm.PublicConstructorAccess;
-import com.think.core.annotation.Handler;
+import com.think.common.annotation.Handler;
 import com.think.util.ClassScanner;
 import org.junit.Test;
 

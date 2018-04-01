@@ -1,12 +1,21 @@
 package com.think.core;
 
+import com.google.common.collect.Lists;
+
 import java.io.Serializable;
-import java.util.concurrent.locks.ReentrantLock;
+import java.net.InetSocketAddress;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.think.common.DataMap;
+import com.think.core.net.message.ResponseWrapper;
+import com.think.service.MessageManager;
+import com.think.service.SessionManager;
 import com.think.util.TimeUtil;
 
+import akka.stream.impl.fusing.Collect$;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
 
 /**
  * 网络会话对象
@@ -16,79 +25,49 @@ import io.netty.channel.Channel;
 public final class Session implements Serializable {
     private static final long serialVersionUID = -4950161575479529827L;
     public long sessionId;
-    public transient Channel ioChannel;
+    public transient Channel channel;
     public int userId;
     public int accountId;
     public String nickName;
     public String clientIP;
     public int serverId;
-    public String publisher = "0";
-    public String clientVersion = "0";
-    public String logoutCase = "";
-    public byte protocolVersion;
-    private final ReentrantLock mainLock = new ReentrantLock();
+    public long accessTime;
+    public DataMap params;
 
-    public int getUserId() {
-        return userId;
+    public Session(Channel channel) {
+        this.sessionId = SessionManager.getInstance().nextId();
+        this.channel = channel;
+        this.userId = 0;
+        this.clientIP = ((InetSocketAddress) channel.remoteAddress()).getAddress().getHostAddress();
+        this.accessTime = System.currentTimeMillis();
+        this.params = new DataMap();
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public static Session newSession(Channel channel) {
+        return new Session(channel);
     }
 
-    public String getNickName() {
-        return nickName;
+    public void close() {
+        channel.close();
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+
+    public void write(ResponseWrapper message) {
+        List<ResponseWrapper> messages = Lists.newArrayList();
+        messages.add(message);
+        write(messages);
     }
 
-    public String getClientIP() {
-        return clientIP;
-    }
-
-    public void setClientIP(String clientIP) {
-        this.clientIP = clientIP;
-    }
-
-    public int getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(int serverId) {
-        this.serverId = serverId;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getClientVersion() {
-        return clientVersion;
-    }
-
-    public void setClientVersion(String clientVersion) {
-        this.clientVersion = clientVersion;
-    }
-
-    public ReentrantLock getMainLock() {
-        return mainLock;
+    public void write(List<ResponseWrapper> messages) {
+        MessageManager.write(channel, messages);
     }
 
     public DataMap toMap() {
         DataMap data = new DataMap();
         data.put("accountId", accountId).put("clientIP", clientIP).put("nickName", nickName)
-                .put("publisher", publisher).put("serverId", serverId).put("userId", userId)
+                .put("serverId", serverId).put("userId", userId)
                 .put("timestamp", TimeUtil.getNowDateTime());
         return data;
     }
 
-    public Channel channel() {
-        return ioChannel;
-    }
 }

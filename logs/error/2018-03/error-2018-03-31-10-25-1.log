@@ -1,0 +1,7 @@
+2018-03-31 10:25:17.038 [main] ERROR com.think.service.HandlerManager - Parse message dataTime: "2017-12-17 16:21:44"
+lon: 120.112
+lat: 39.123
+altitude: 1
+gpsStatus: 1
+direction: 30.2
+

@@ -12,7 +12,7 @@ public class HandlerMapping {
     private Object handler;
     private Method method;
     private MethodAccess access;
-    private int requestId;
+    private short requestId;
     private int methodIndex;
     private Class<? extends GeneratedMessage> request;
 
@@ -24,11 +24,11 @@ public class HandlerMapping {
         this.methodIndex = methodIndex;
     }
 
-    public int getRequestId() {
+    public short getRequestId() {
         return requestId;
     }
 
-    public void setRequestId(int requestId) {
+    public void setRequestId(short requestId) {
         this.requestId = requestId;
     }
 

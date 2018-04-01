@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- status : 指定log4j本身的打印日志的级别.ALL< Trace < DEBUG < INFO < WARN < ERROR 
+<!-- status : 指定log4j本身的打印日志的级别.ALL< Trace < DEBUG < INFO < WARN < ERROR
     < FATAL < OFF。 monitorInterval : 用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s. -->
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <!-- 配置日志文件输出目录 ${sys:user.home} -->
-        <Property name="LOG_HOME">/root/workspace/lucenedemo/logs</Property>
-        <property name="ERROR_LOG_FILE_NAME">/root/workspace/lucenedemo/logs/error</property> 
-        <property name="WARN_LOG_FILE_NAME">/root/workspace/lucenedemo/logs/warn</property>
+        <Property name="LOG_HOME">logs</Property>
+        <property name="ERROR_LOG_FILE_NAME">logs/error</property>
+        <property name="WARN_LOG_FILE_NAME">logs/warn</property>
 
         <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t-%L] %-5level %logger{36} - %msg%n</property>
     </Properties>
@@ -19,25 +19,25 @@
             <ThresholdFilter level="trace" onMatch="ACCEPT"
                 onMismatch="DENY" />
             <!-- 输出日志的格式 -->
-            <!-- 
-                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间 
-                %p : 日志输出格式 
-                %c : logger的名称 
-                %m : 日志内容，即 logger.info("message") 
-                %n : 换行符 
-                %C : Java类名 
-                %L : 日志输出所在行数 
-                %M : 日志输出所在方法名 
-                hostName : 本地机器名 
+            <!--
+                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+                %p : 日志输出格式
+                %c : logger的名称
+                %m : 日志内容，即 logger.info("message")
+                %n : 换行符
+                %C : Java类名
+                %L : 日志输出所在行数
+                %M : 日志输出所在方法名
+                hostName : 本地机器名
                 hostAddress : 本地ip地址 -->
-            <PatternLayout 
+            <PatternLayout
                 pattern="${PATTERN}" />
         </Console>
 
         <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用 -->
         <!--append为TRUE表示消息增加到指定文件中，false表示消息覆盖指定的文件内容，默认值是true -->
         <File name="log" fileName="logs/test.log" append="false">
-            <PatternLayout 
+            <PatternLayout
                 pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
         <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，

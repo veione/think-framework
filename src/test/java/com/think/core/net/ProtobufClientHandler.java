@@ -2,8 +2,14 @@ package com.think.core.net;
 
 import com.google.protobuf.MessageLite;
 
+import com.think.core.net.message.RequestWrapper;
+import com.think.core.net.message.ResponseWrapper;
+import com.think.core.net.security.EncryptionDecryption;
+import com.think.protocol.Gps;
 import com.think.test.protobuf.PersonProtos;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -18,9 +24,7 @@ public class ProtobufClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-
-        PersonProtos.Person person = (PersonProtos.Person)msg;
-        System.out.println(person.getEmail());
+        System.out.println(msg);
     }
 
     @Override
@@ -29,17 +33,23 @@ public class ProtobufClientHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    public MessageLite build() {
-        PersonProtos.Person.Builder personBuilder = PersonProtos.Person.newBuilder();
-        personBuilder.setEmail("lisi@gmail.com");
-        personBuilder.setId(1000);
-        PersonProtos.Person.PhoneNumber.Builder phone = PersonProtos.Person.PhoneNumber.newBuilder();
-        phone.setNumber("18610000000");
+    public ResponseWrapper build() {
+        Gps.gps_data.Builder builder = Gps.gps_data.newBuilder();
+        builder.setAltitude(1);
+        builder.setDataTime("2017-12-17 16:21:44");
+        builder.setGpsStatus(1);
+        builder.setLat(39.123);
+        builder.setLon(120.112);
+        builder.setDirection(30.2F);
 
-        personBuilder.setName("李四");
-        personBuilder.addPhone(phone.build());
+        short msgId = 100;
+        ResponseWrapper wrapper = ResponseWrapper.newBuilder();
+        wrapper.setResponseId(msgId);
+        wrapper.setReal(true);
+        wrapper.setPayload(builder.build());
+        wrapper.setAccessTime(System.currentTimeMillis());
 
-        return personBuilder.build();
+        return wrapper;
     }
 
 }

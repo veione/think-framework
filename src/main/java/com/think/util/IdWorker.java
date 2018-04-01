@@ -29,7 +29,6 @@ public class IdWorker {
         if (this.lastTimestamp == timestamp) {
             this.sequence = (this.sequence + 1) & this.sequenceMask;
             if (this.sequence == 0) {
-                System.out.println("###########" + sequenceMask);
                 timestamp = this.tilNextMillis(this.lastTimestamp);
             }
         } else {
@@ -49,9 +48,6 @@ public class IdWorker {
         this.lastTimestamp = timestamp;
         long nextId = ((timestamp - twepoch << timestampLeftShift))
                 | (this.workerId << this.workerIdShift) | (this.sequence);
-        System.out.println("timestamp:" + timestamp + ",timestampLeftShift:"
-                + timestampLeftShift + ",nextId:" + nextId + ",workerId:"
-                + workerId + ",sequence:" + sequence);
         return nextId;
     }
 
@@ -65,12 +61,6 @@ public class IdWorker {
 
     private long timeGen() {
         return System.currentTimeMillis();
-    }
-
-
-    public static void main(String[] args){
-        IdWorker worker2 = new IdWorker(2);
-        System.out.println(worker2.nextId());
     }
 
 }

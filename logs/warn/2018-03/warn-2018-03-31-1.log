@@ -1,0 +1,32 @@
+2018-03-31 10:25:17.038 [main] ERROR com.think.service.HandlerManager - Parse message dataTime: "2017-12-17 16:21:44"
+lon: 120.112
+lat: 39.123
+altitude: 1
+gpsStatus: 1
+direction: 30.2
+
+2018-03-31 10:26:55.843 [main] ERROR com.think.service.HandlerManager - Parse message dataTime: "2017-12-17 16:21:44"
+lon: 120.112
+lat: 39.123
+altitude: 1
+gpsStatus: 1
+direction: 30.2
+
+2018-03-31 10:27:21.869 [main] ERROR com.think.service.HandlerManager - Parse message dataTime: "2017-12-17 16:21:44"
+lon: 120.112
+lat: 39.123
+altitude: 1
+gpsStatus: 1
+direction: 30.2
+
+2018-03-31 15:51:32.252 [main] ERROR com.think.core.net.codec.ProtocolDecoder - =============================================================================
+2018-03-31 15:51:42.602 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Invalid checksum message
+2018-03-31 15:52:40.318 [main] ERROR com.think.core.net.codec.ProtocolDecoder - =============================================================================
+2018-03-31 15:52:40.335 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Invalid checksum message
+2018-03-31 15:52:55.908 [main] ERROR com.think.core.net.codec.ProtocolDecoder - =============================================================================
+2018-03-31 15:53:46.811 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Invalid checksum message
+2018-03-31 15:54:46.930 [main] ERROR com.think.core.net.codec.ProtocolDecoder - =============================================================================
+2018-03-31 15:56:02.583 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Invalid checksum message
+2018-03-31 20:10:14.026 [main] ERROR com.think.core.net.codec.ProtocolDecoder - =============================================================================
+2018-03-31 20:10:14.038 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Invalid checksum message
+2018-03-31 21:31:29.223 [main] WARN  com.think.core.net.codec.ProtocolDecoder - Message too long error 46

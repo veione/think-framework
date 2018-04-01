@@ -1,6 +1,7 @@
 package com.think.service;
 
 import com.think.core.Session;
+import com.think.util.IdWorker;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -17,32 +18,38 @@ import io.netty.util.internal.PlatformDependent;
  * @author veione
  */
 public final class SessionManager {
+    /**
+     * 会话键
+     */
+    public static final AttributeKey<Session> SESSION_KEY = AttributeKey.valueOf("sessionId");
+    /**
+     * 会话ID生成器
+     */
+    private IdWorker idWorker;
     /***
      * 会话计数器
      */
     private static final AtomicInteger sessionCounter = new AtomicInteger(0);
     /**
-     * 会话键
-     */
-    private static final AttributeKey<Session> SESSION_KEY = AttributeKey.valueOf("session");
-    /**
      * 会话存储对象
      */
     private static final ConcurrentMap<Channel, Session> SESSIONS = PlatformDependent.newConcurrentHashMap();
 
+    public void setIdWorker(final IdWorker worker) {
+        this.idWorker = worker;
+    }
+
     /**
      * 新增会话对象
      *
-     * @param channel 连接channel
      * @param session 会话对象
      */
-    public boolean addSession(Channel channel, Session session) {
-        Attribute<Session> sessionAttr = channel.attr(SESSION_KEY);
-
+    public boolean addSession(Session session) {
+        Attribute<Session> sessionAttr = session.channel.attr(SESSION_KEY);
         boolean flag = sessionAttr.compareAndSet(null, session);
         if (flag) {
             sessionCounter.incrementAndGet();
-            SESSIONS.put(channel, session);
+            SESSIONS.put(session.channel, session);
         }
         return flag;
     }
@@ -67,6 +74,7 @@ public final class SessionManager {
     public Session removeSession(Channel channel) {
         Session session = SESSIONS.remove(channel);
         if (session != null) {
+            session.close();
             sessionCounter.decrementAndGet();
         }
         return session;
@@ -76,7 +84,7 @@ public final class SessionManager {
      * 移除会话对象
      */
     public Session removeSession(Session session) {
-        Session exitSession = SESSIONS.remove(session.channel());
+        Session exitSession = SESSIONS.remove(session.channel);
         if (exitSession != null) {
             sessionCounter.decrementAndGet();
         }
@@ -95,6 +103,13 @@ public final class SessionManager {
      */
     public int getSessionCount() {
         return sessionCounter.get();
+    }
+
+    public long nextId() {
+        if (this.idWorker == null) {
+            throw new NullPointerException("Please initialization id generator object.");
+        }
+        return idWorker.nextId();
     }
 
     /**

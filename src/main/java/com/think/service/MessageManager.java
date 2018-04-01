@@ -1,103 +1,147 @@
 package com.think.service;
 
-import com.esotericsoftware.reflectasm.MethodAccess;
-import com.esotericsoftware.reflectasm.PublicConstructorAccess;
-import com.google.protobuf.*;
-import com.think.core.annotation.Handler;
-import com.think.core.HandlerMapping;
-import com.think.core.MessageMapping;
-import com.think.core.annotation.Mapping;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
+import com.google.protobuf.MessageLite;
+
+import com.think.common.annotation.Handler;
+import com.think.common.annotation.Mapping;
+import com.think.core.net.message.ResponseWrapper;
+import com.think.protocol.Gps;
 import com.think.util.ClassScanner;
 
-import java.lang.reflect.Field;
+import org.apache.commons.lang3.time.StopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.LockSupport;
 
-public class MessageManager {
-    private static final Map<Integer, GeneratedMessage> MESSAGES = new HashMap<>();
+import io.netty.channel.Channel;
 
-    public void load() {
-        Map<Integer, HandlerMapping> handlerMap = HandlerManager.getHandlers();
+/**
+ * 消息管理器
+ */
+public final class MessageManager {
+    private static Logger logger = LoggerFactory.getLogger(MessageManager.class);
+    private static final Map<Short, MessageLite> MESSAGES = new HashMap<>();
+    private static final Queue<ResponseWrapper> msgQueue = new ConcurrentLinkedQueue();
+    private static String packageName;
 
-        for (Map.Entry<Integer, HandlerMapping> entry : handlerMap.entrySet()) {
-            HandlerMapping handler = entry.getValue();
-            handler.getMethod();
-
-        }
-        Set<Class<?>> clsses = ClassScanner.getClasses(pkg, clazz -> clazz.isAnnotationPresent(Handler.class));
+    /**
+     * 加载消息
+     */
+    public static void load(String pkgName) {
+        Objects.requireNonNull(pkgName);
+        packageName = pkgName;
+        StopWatch watch = new StopWatch();
+        watch.start();
+        Set<Class<?>> classes = ClassScanner.getClasses(packageName, clazz -> clazz.isAnnotationPresent(Handler.class));
         try {
-            for (Class clz : clsses) {
-                Object obj = PublicConstructorAccess.get(clz.getClass());
-                Arrays.stream(obj.getClass().getDeclaredMethods()).filter(m -> m.isAnnotationPresent(Mapping.class)).forEach(m -> {
-                    Class<?> msg = m.getAnnotation(Mapping.class).msg();
-
-                    MessageMapping mapping = new MessageMapping();
-                    Method buildMethod = msg.getMethod("newBuilder", null);
-                    Object buildObject = buildMethod.invoke(null);
-                    Field[] buildFields = buildObject.getClass().getDeclaredFields();
-                    Arrays.stream(buildFields).forEach(b -> b.setAccessible(true));
-
-
-                    Method m = clazz.getMethod("getDescriptor", null);
-                    Object object = m.invoke(null);
-                    Descriptors.Descriptor descriptor = (Descriptors.Descriptor) object;
-
-                    mapping.setDescriptor(descriptor);
-                    mapping.setMsgBuilderCls(buildObject);
-                    mapping.setMsgFields(buildFields);
-                    model.setMsgMapping(mapping);
-                });
-
+            for (Class<?> clz : classes) {
+                Object handler = clz.newInstance();
+                Method[] methods = handler.getClass().getDeclaredMethods();
+                for (Method method : methods) {
+                    // 得到该类下面的RequestMapping注解
+                    Mapping mapping = method.getAnnotation(Mapping.class);
+                    if (mapping != null) {
+                        Class<?> requestObject = mapping.msg();
+                        MessageLite prototype = (MessageLite) requestObject.getMethod("getDefaultInstance", null).invoke(requestObject);
+                        MESSAGES.put(mapping.requestId(), prototype);
+                    }
+                }
             }
+            watch.stop();
+            logger.debug("Load {} messages, total time consuming {}", MESSAGES.size(), watch.getTime());
+            initMessageWorker();
         } catch (Exception e) {
-
+            logger.error("Load message handler error", e);
         }
-
     }
 
-
-    private static Descriptors.Descriptor getDescriptor(Integer requestId) {
-        return getHandler(requestId).getMsgMapping().getDescriptor();
-    }
-
-    public static Message parseMessage(Integer requestId, byte[] buf) throws InvalidProtocolBufferException {
-        DynamicMessage dynamicMessage = DynamicMessage.parseFrom(getDescriptor(handler.getRequestId()), buf);
-
-
+    private static void initMessageWorker() {
+        ExecutorService executor = Executors.newFixedThreadPool(6, new ThreadFactoryBuilder().setNameFormat("message-dispatcher-%d").build());
+        for (int i = 1; i < 7; i++) {
+            executor.execute(new MessageWorker());
+        }
     }
 
     /**
-     * 解析消息
-     *
-     * @param handler 请求消息id
-     * @param buf     字节缓冲
+     * 获取消息映射对象
      */
-    public static Message parseMessage(HandlerMapping handler, byte[] buf) throws InvalidProtocolBufferException {
-        DynamicMessage dynamicMessage = DynamicMessage.parseFrom(getDescriptor(handler.getRequestId()), buf);
-        DynamicMessage.Builder builder = dynamicMessage.toBuilder();
-        Map<Descriptors.FieldDescriptor, Object> fieldsMap = builder.getAllFields();
+    public static MessageLite getPrototype(Short requestId) {
+        return MESSAGES.get(requestId);
+    }
 
-        Field[] buildFields = handler.getMsgMapping().getMsgFields();
-        Object buildObject = handler.getMsgMapping().getMsgBuilderCls();
+    /**
+     * 重新加载消息
+     */
+    public static void reload() {
+        MESSAGES.clear();
+        load(packageName);
+    }
 
-        fieldsMap.forEach((k, v) -> {
-            String fieldKey = k.getJsonName();
-            Arrays.stream(buildFields).forEach(c -> {
-                if (fieldKey.equals(c.getName().replace("_", ""))) {
-                    try {
-                        c.set(buildObject, v);
-                    } catch (IllegalAccessException e) {
-                        // ignore
-                    }
-                }
-            });
+    public static void main(String[] args) throws InvalidProtocolBufferException {
+        HandlerManager.load("com.think");
+        MessageManager.load("com.think");
+        Gps.gps_data.Builder builder = Gps.gps_data.newBuilder();
+        builder.setAltitude(1);
+        builder.setDataTime("2017-12-17 16:21:44");
+        builder.setGpsStatus(1);
+        builder.setLat(39.123);
+        builder.setLon(120.112);
+        builder.setDirection(30.2F);
+
+
+        GeneratedMessage instance = Gps.gps_data.getDefaultInstance();
+        Message message = instance.getParserForType().parseFrom(builder.build().toByteArray());
+        System.out.println("message = [" + message + "]");
+        //Message msg = MessageManager.parseMessage((short) 100, builder.build().toByteArray());
+        //System.out.println("msg = [" + msg + "]");
+    }
+
+    public static void write(Channel channel, List<ResponseWrapper> messages) {
+        List<ResponseWrapper> realResponses = new ArrayList<>(messages.size());
+        messages.stream().forEach(msg -> {
+            if (msg.isReal()) { //是否为实时消息
+                realResponses.add(msg);
+            } else {
+                msgQueue.offer(msg);
+            }
         });
+        // 写出实时消息
+        if (!realResponses.isEmpty()) {
+            channel.writeAndFlush(realResponses);
+        }
+    }
 
-        GeneratedMessage.Builder msgBuilder = (GeneratedMessage.Builder) buildObject;
-        Message message = msgBuilder.build();
-        return message;
+    static class MessageWorker extends Thread {
+
+        @Override
+        public void run() {
+            while (true) {
+                synchronized (msgQueue) {
+                    if (!msgQueue.isEmpty()) {
+                        ResponseWrapper message = msgQueue.poll();
+                        if (message != null) {
+                            message.getSession().channel.writeAndFlush(message);
+                        }
+                    }
+                    LockSupport.parkNanos(1000);
+                }
+            }
+        }
     }
 }

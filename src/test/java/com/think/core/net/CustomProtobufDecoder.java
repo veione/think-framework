@@ -3,6 +3,7 @@ package com.think.core.net;
 import com.google.protobuf.Message;
 import com.google.protobuf.MessageLite;
 
+import com.think.core.net.message.RequestWrapper;
 import com.think.exception.IllegalProtocolException;
 
 import java.util.List;
@@ -36,16 +37,16 @@ public class CustomProtobufDecoder extends MessageToMessageDecoder<ByteBuf> {
         final int offset;
         final int length = msg.readableBytes();
         final Message prototype;
-        final RequestWrapper context;
+        final com.think.core.net.message.RequestWrapper context;
 
         if (length >= 10 && checksum(msg)) {
-            int msgId = msg.readInt();
+            short msgId = msg.readShort();
             prototype = MessageManager.get(msgId);
             if (prototype == null) {
                 throw new IllegalProtocolException();
             } else {
                 context = RequestWrapper.newBuilder();
-                context.setRequestType(msgId);
+                context.setRequestId(msgId);
 
                 if (msg.hasArray()) {
                     array = msg.array();
@@ -57,9 +58,11 @@ public class CustomProtobufDecoder extends MessageToMessageDecoder<ByteBuf> {
                 }
 
                 if (HAS_PARSER) {
-                    context.setRequest(prototype.getParserForType().parseFrom(array, offset, length));
+                    prototype.getParserForType().parseFrom(array, offset, length);
+                    //context.setRequest();
                 } else {
-                    context.setRequest(prototype.newBuilderForType().mergeFrom(array, offset, length).build());
+                    prototype.newBuilderForType().mergeFrom(array, offset, length).build();
+                    //context.setRequest();
                 }
                 out.add(context);
             }
