@@ -12,9 +12,3 @@
 2018-04-13 10:59:56.222 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
 2018-04-13 11:01:01.620 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
 2018-04-13 11:04:01.497 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:04:32.771 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:06:19.659 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:06:52.308 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:11:23.805 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:21:13.316 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
-2018-04-13 11:23:44.853 [main] WARN  org.apache.commons.dbcp2.BasicDataSource - The requested JMX name [think-mysql-db] was not valid and will be ignored.
