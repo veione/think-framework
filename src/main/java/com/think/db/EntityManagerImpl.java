@@ -1,25 +1,30 @@
 package com.think.db;
 
 import com.think.util.ClassScanner;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
-
-import java.sql.SQLException;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static com.think.db.Constant.DEFAULT_LOAD_LIMIT;
 
+/**
+ * 默认实体对象实现类
+ *
+ * @author Gavin
+ */
 public class EntityManagerImpl implements EntityManager {
     private final BasicDataSource dataSource = new BasicDataSource();
     private final QueryRunner runner = new QueryRunner(dataSource);

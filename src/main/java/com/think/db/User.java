@@ -1,7 +1,7 @@
 package com.think.db;
 
 @Table(table = "users")
-public class User extends BaseEntity<User> {
+public class User extends BaseEntity {
     private int id;
     private String name;
     private int age;

@@ -1,6 +1,6 @@
-package com.think.exception;
+package com.think.common.exception;
 
-public class IllegalProtocolException extends Exception {
+public class IllegalProtocolException extends WorldException {
     public IllegalProtocolException() {
     }
 

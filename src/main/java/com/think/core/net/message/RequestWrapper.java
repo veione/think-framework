@@ -1,15 +1,15 @@
-package com.think.core.net.message;
+package com.think.net.message;
 
 import com.google.protobuf.MessageLite;
 
-import com.think.core.Session;
+import com.think.net.session.Session;
 
 import io.netty.channel.Channel;
 
 /**
  * 请求包装类
  */
-public class RequestWrapper {
+public class RequestWrapper implements NetMessage {
     public static final short MAGIC_WORD = 0x75;
     public static final int MAX_FRAME_SIZE = 10240;
     public static final int MIN_FRAME_SIZE = 4;

@@ -95,7 +95,7 @@ public class EntityRowProcesor implements RowProcessor {
      * @param rs ResultSet that supplies the array data
      * @return the newly created array
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.RowProcessor#toArray(java.sql.ResultSet)
+     * @see org.apache.commons.dbutils.RowProcessor#toArray(ResultSet)
      */
     @Override
     public Object[] toArray(ResultSet rs) throws SQLException {
@@ -119,8 +119,8 @@ public class EntityRowProcesor implements RowProcessor {
      * @param type Class from which to create the bean instance
      * @return the newly created bean
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
-     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.RowProcessor#toBean(ResultSet, Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBean(ResultSet, Class)
      */
     @Override
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
@@ -137,8 +137,8 @@ public class EntityRowProcesor implements RowProcessor {
      * @return A <code>List</code> of beans with the given type in the order
      * they were returned by the <code>ResultSet</code>.
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
-     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.RowProcessor#toBeanList(ResultSet, Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(ResultSet, Class)
      */
     @Override
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
@@ -158,7 +158,7 @@ public class EntityRowProcesor implements RowProcessor {
      * @param rs ResultSet that supplies the map data
      * @return the newly created Map
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
+     * @see org.apache.commons.dbutils.RowProcessor#toMap(ResultSet)
      */
     @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {

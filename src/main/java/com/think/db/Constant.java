@@ -1,5 +1,10 @@
 package com.think.db;
 
+/**
+ * 数据库操作常亮类
+ *
+ * @author Gavin 2018年4月13日21:27:00
+ */
 public class Constant {
     public static final String ALL = "*";
     public static final String QUERY = "SELECT";

@@ -4,7 +4,6 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +75,7 @@ public class EntityDescription {
         try {
             for (PropertyDescriptor desc : this.propertys) {
                 String name = desc.getName();
-                Object value = desc.getReadMethod().invoke(object, null);
+                Object value = desc.getReadMethod().invoke(object);
                 if (value != null && !name.equalsIgnoreCase("class")) {
                     paramsMap.put(name, value);
                 }

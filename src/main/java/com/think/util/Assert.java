@@ -1,44 +1,45 @@
 package com.think.util;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
-public class Assert {
-
-  public static void notNull(Class<?> clazz, String desc) {
-    if (clazz == null) {
-      throw new IllegalArgumentException(desc);
+/**
+ * 断言工具类，用于对方法的传入参数进行校验，如果未通过则
+ * 抛出<code>IllegalArgumentException</code>异常
+ *
+ * @see IllegalArgumentException
+ */
+public abstract class Assert {
+    /**
+     * 断言对象不为空
+     */
+    public static void notNull(Object obj) {
+        if (obj == null) {
+            notNull(obj, null);
+        }
     }
-  }
 
-  public static void isTrue(boolean b, String desc) {
-    if (!b) {
-      throw new IllegalArgumentException(desc);
+    /**
+     * 断言对象不为空
+     */
+    public static void notNull(Object obj, String msg) {
+        if (obj == null) {
+            throw new IllegalArgumentException(msg);
+        }
     }
-  }
 
-  public static void notNull(String name, String desc) {
-    if (name == null) {
-      throw new IllegalArgumentException(desc);
+    /**
+     * 断言表达式为真
+     */
+    public static void isTrue(boolean expression) {
+        if (!expression) {
+            isTrue(expression, null);
+        }
     }
-  }
 
-  public static void notNull(Method method, String desc) {
-    if (method == null) {
-      throw new IllegalArgumentException(desc);
+    /**
+     * 断言表达式为真
+     */
+    public static void isTrue(boolean expression, String msg) {
+        if (!expression) {
+            throw new IllegalArgumentException(msg);
+        }
     }
-  }
-
-  public static void notNull(Object target, String desc) {
-    if (target == null) {
-      throw new IllegalArgumentException(desc);
-    }
-  }
-
-  public static void notEmpty(Map<String, Object> parameters, String desc) {
-    if (parameters == null || parameters.isEmpty()) {
-      throw new IllegalArgumentException(desc);
-    }
-  }
-
 }

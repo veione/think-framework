@@ -1,15 +1,14 @@
 package com.think.util;
 
-import com.think.db.*;
-import com.think.db.BaseEntity.Mark;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtil {
+/**
+ * 字符串工具类
+ *
+ * @author Gavin
+ */
+public final class StringUtil {
     /**
      * 下划线转驼峰法
      *
@@ -65,52 +64,5 @@ public class StringUtil {
             sb.append(matcher.end() == line.length() ? "" : "_");
         }
         return sb.toString();
-    }
-
-    public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-        /*String line = "user_name";
-        String camel = underline2Camel(line, true);
-        System.out.println(camel);
-        System.out.println(camel2Underline(camel));
-
-        User user = new User();
-        user.mark(Mark.UPDATE);
-
-
-        EntityDescription description = new EntityDescription();
-        description.parse(User.class);
-        System.out.println("description = [" + description + "]");*/
-
-
-        EntityManager manager = ServerContext.getEntityManager();
-        User myUser = new User();
-        myUser.setId(9527);
-        myUser.setAge(21);
-        User u = manager.load(myUser);
-        u.mark(Mark.UPDATE);
-        System.out.println("User = [" + u + "]");
-
-
-        User user1 = new User();
-        user1.setAge(21);
-        user1.setId(9530);
-        user1.setName("Python");
-        user1.setNickName("Jim");
-        //manager.insert(user1);
-
-        //manager.delete(user1);
-
-
-        //manager.update(user1);
-
-        User user2 = manager.load(user1);
-        System.out.println("user2 = [" + user2 + "]");
-
-        Map<String, Object> wheres = new HashMap<>();
-        wheres.put("age", 1);
-        List<User> users = manager.load(User.class, wheres, 2);
-        System.out.println("users = [" + users + "]");
-
-        manager.shutdown();
     }
 }

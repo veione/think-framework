@@ -17,6 +17,7 @@
 package com.think.db;
 
 import com.think.util.StringUtil;
+
 import org.apache.commons.dbutils.BasicRowProcessor;
 
 import java.beans.BeanInfo;
@@ -25,7 +26,6 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -272,7 +272,7 @@ public class EntityProcessor {
                 } else if ("java.sql.Timestamp".equals(targetType)) {
                     Timestamp tsValue = (Timestamp) value;
                     int nanos = tsValue.getNanos();
-                    value = new java.sql.Timestamp(tsValue.getTime());
+                    value = new Timestamp(tsValue.getTime());
                     ((Timestamp) value).setNanos(nanos);
                 }
             } else if (value instanceof String && params[0].isEnum()) {

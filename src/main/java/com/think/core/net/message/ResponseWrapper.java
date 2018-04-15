@@ -1,13 +1,13 @@
-package com.think.core.net.message;
+package com.think.net.message;
 
 import com.google.protobuf.MessageLite;
 
-import com.think.core.Session;
+import com.think.net.session.Session;
 
 /**
  * 消息响应包装器
  */
-public class ResponseWrapper {
+public class ResponseWrapper implements NetMessage {
     private short responseId;
     private MessageLite payload;
     private long accessTime;

@@ -1,12 +1,31 @@
 package com.think.db;
 
+import com.think.util.StringUtil;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.think.db.Constant.*;
-
-import com.think.util.StringUtil;
+import static com.think.db.Constant.ALL;
+import static com.think.db.Constant.AND;
+import static com.think.db.Constant.DELETE;
+import static com.think.db.Constant.DESC;
+import static com.think.db.Constant.EQUAL;
+import static com.think.db.Constant.FROM;
+import static com.think.db.Constant.INSERT;
+import static com.think.db.Constant.INTO;
+import static com.think.db.Constant.LEFT_BRACKET;
+import static com.think.db.Constant.LIMIT;
+import static com.think.db.Constant.ORDER_BY;
+import static com.think.db.Constant.QUERY;
+import static com.think.db.Constant.RIGHT_BRACKET;
+import static com.think.db.Constant.SET;
+import static com.think.db.Constant.SPACE;
+import static com.think.db.Constant.SYNBOL_COMMA;
+import static com.think.db.Constant.SYNBOL_QUESTION;
+import static com.think.db.Constant.UPDATE;
+import static com.think.db.Constant.VALUES;
+import static com.think.db.Constant.WHERE;
 
 /**
  * SQL语句构建工具类
@@ -97,8 +116,7 @@ public final class SQLBuilder {
      * @return
      */
     public SQLBuilder insert(String tableName) {
-        String[] fields = null;
-        return insert(tableName, fields);
+        return insert(tableName, new Object());
     }
 
     /**
@@ -110,7 +128,7 @@ public final class SQLBuilder {
      */
     public SQLBuilder insert(String tableName, Object... fields) {
         builder.append(INSERT).append(SPACE).append(INTO).append(SPACE).append(tableName);
-        if (fields != null) {
+        if (fields != null && fields.length > 0) {
             placeholder(fields);
         }
         return this;

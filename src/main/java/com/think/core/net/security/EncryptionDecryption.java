@@ -1,7 +1,5 @@
-package com.think.core.net.security;
+package com.think.net.security;
 
-
-import com.think.protocol.Gps;
 
 import java.security.Key;
 import java.security.Security;
@@ -9,8 +7,6 @@ import java.security.Security;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-
-import io.netty.buffer.ByteBufUtil;
 
 /**
  * 加密密解类
@@ -168,39 +164,5 @@ public class EncryptionDecryption {
         //生成密匙
         Key key = new javax.crypto.spec.SecretKeySpec(arrB, "DES");
         return key;
-    }
-
-    public static void main(String[] args) throws Exception {
-        EncryptionDecryption des = new EncryptionDecryption();
-        String oldStr = "wangfeng";
-        String newStr = "";
-        newStr = des.encrypt(oldStr);
-        System.out.println("加密后 = [" + newStr + "]");
-        oldStr = "";//清空老数据
-        oldStr = des.decrypt(newStr);
-        System.out.println("解密后 = [" + oldStr + "]");
-
-        Gps.gps_data.Builder builder = Gps.gps_data.newBuilder();
-        builder.setAltitude(1);
-        builder.setDataTime("2017-12-17 16:21:44");
-        builder.setGpsStatus(1);
-        builder.setLat(39.123);
-        builder.setLon(120.112);
-        builder.setDirection(30.2F);
-
-        byte[] originBuf = builder.build().toByteArray();
-        byte[] encBuf = des.encrypt(originBuf);
-        System.out.println("未加密之前大小 = [" + originBuf.length + "]");
-        System.out.println("加密之后大小 = [" + encBuf.length + "]");
-        System.out.println("未加密消息 = [" + ByteBufUtil.hexDump(originBuf) + "]");
-        System.out.println("加密之后消息 = [" + ByteBufUtil.hexDump(encBuf) + "]");
-
-
-        byte[] desBuf = des.decrypt(encBuf);
-        System.out.println("解密之后大小 = [" + desBuf.length + "]");
-        System.out.println("解密之后消息 = [" + ByteBufUtil.hexDump(desBuf) + "]");
-        System.out.println("原始消息 = [" + ByteBufUtil.hexDump(originBuf) + "]");
-
-
     }
 }

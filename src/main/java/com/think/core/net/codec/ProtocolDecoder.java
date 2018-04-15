@@ -1,12 +1,12 @@
-package com.think.core.net.codec;
+package com.think.net.codec;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.MessageLite;
 
-import com.think.core.net.message.RequestWrapper;
-import com.think.core.net.security.EncryptionDecryption;
-import com.think.exception.IllegalProtocolException;
-import com.think.service.MessageManager;
+import com.think.common.exception.IllegalProtocolException;
+import com.think.net.message.RequestWrapper;
+import com.think.net.security.EncryptionDecryption;
+import com.think.net.service.MessageManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
