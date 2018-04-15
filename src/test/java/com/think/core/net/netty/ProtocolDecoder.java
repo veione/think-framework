@@ -3,9 +3,9 @@ package com.think.core.net.netty;
 import com.google.common.collect.Lists;
 import com.google.protobuf.MessageLite;
 
+import com.think.exception.IllegalProtocolException;
 import com.think.core.net.message.RequestWrapper;
 import com.think.core.net.security.EncryptionDecryption;
-import com.think.exception.IllegalProtocolException;
 import com.think.service.MessageManager;
 
 import org.slf4j.Logger;

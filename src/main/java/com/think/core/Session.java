@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.think.common.DataMap;
 import com.think.core.net.message.ResponseWrapper;
@@ -13,9 +12,7 @@ import com.think.service.MessageManager;
 import com.think.service.SessionManager;
 import com.think.util.TimeUtil;
 
-import akka.stream.impl.fusing.Collect$;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 
 /**
  * 网络会话对象

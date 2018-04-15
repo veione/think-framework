@@ -1,15 +1,11 @@
-package com.think.service;
+package com.think.core.net.service;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
 import com.google.protobuf.MessageLite;
 
 import com.think.common.annotation.Handler;
 import com.think.common.annotation.Mapping;
 import com.think.core.net.message.ResponseWrapper;
-import com.think.protocol.Gps;
 import com.think.util.ClassScanner;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -58,8 +54,12 @@ public final class MessageManager {
                     Mapping mapping = method.getAnnotation(Mapping.class);
                     if (mapping != null) {
                         Class<?> requestObject = mapping.msg();
-                        MessageLite prototype = (MessageLite) requestObject.getMethod("getDefaultInstance", null).invoke(requestObject);
-                        MESSAGES.put(mapping.requestId(), prototype);
+                        Method invoke = requestObject.getMethod("getDefaultInstance");
+                        MessageLite prototype;
+                        if (invoke != null) {
+                            prototype = (MessageLite) invoke.invoke(requestObject);
+                            MESSAGES.put(mapping.requestId(), prototype);
+                        }
                     }
                 }
             }
@@ -74,7 +74,7 @@ public final class MessageManager {
     private static void initMessageWorker() {
         ExecutorService executor = Executors.newFixedThreadPool(6, new ThreadFactoryBuilder().setNameFormat("message-dispatcher-%d").build());
         for (int i = 1; i < 7; i++) {
-            executor.execute(new MessageWorker());
+            executor.execute(new Worker());
         }
     }
 
@@ -93,25 +93,6 @@ public final class MessageManager {
         load(packageName);
     }
 
-    public static void main(String[] args) throws InvalidProtocolBufferException {
-        HandlerManager.load("com.think");
-        MessageManager.load("com.think");
-        Gps.gps_data.Builder builder = Gps.gps_data.newBuilder();
-        builder.setAltitude(1);
-        builder.setDataTime("2017-12-17 16:21:44");
-        builder.setGpsStatus(1);
-        builder.setLat(39.123);
-        builder.setLon(120.112);
-        builder.setDirection(30.2F);
-
-
-        GeneratedMessage instance = Gps.gps_data.getDefaultInstance();
-        Message message = instance.getParserForType().parseFrom(builder.build().toByteArray());
-        System.out.println("message = [" + message + "]");
-        //Message msg = MessageManager.parseMessage((short) 100, builder.build().toByteArray());
-        //System.out.println("msg = [" + msg + "]");
-    }
-
     public static void write(Channel channel, List<ResponseWrapper> messages) {
         List<ResponseWrapper> realResponses = new ArrayList<>(messages.size());
         messages.stream().forEach(msg -> {
@@ -127,7 +108,7 @@ public final class MessageManager {
         }
     }
 
-    static class MessageWorker extends Thread {
+    static class Worker extends Thread {
 
         @Override
         public void run() {

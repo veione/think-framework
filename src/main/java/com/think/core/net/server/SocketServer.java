@@ -15,8 +15,6 @@ import akka.actor.ActorSystem;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
 
 public class SocketServer extends AbstractServer {
     private ActorSystem actorSystem;

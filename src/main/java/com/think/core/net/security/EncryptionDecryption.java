@@ -1,4 +1,4 @@
-package com.think.net.security;
+package com.think.core.net.security;
 
 
 import java.security.Key;

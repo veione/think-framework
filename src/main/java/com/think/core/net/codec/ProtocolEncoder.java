@@ -1,11 +1,11 @@
-package com.think.net.codec;
+package com.think.core.net.codec;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.MessageLite;
 
-import com.think.net.message.RequestWrapper;
-import com.think.net.message.ResponseWrapper;
-import com.think.net.security.EncryptionDecryption;
+import com.think.core.net.message.RequestWrapper;
+import com.think.core.net.message.ResponseWrapper;
+import com.think.core.net.security.EncryptionDecryption;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

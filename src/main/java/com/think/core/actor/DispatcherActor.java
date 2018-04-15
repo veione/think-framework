@@ -1,6 +1,5 @@
 package com.think.core.actor;
 
-import com.think.core.HandlerMapping;
 import com.think.core.Session;
 import com.think.core.net.message.RequestWrapper;
 import com.think.service.HandlerManager;

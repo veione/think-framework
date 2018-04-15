@@ -1,8 +1,8 @@
-package com.think.net.message;
+package com.think.core.net.message;
 
 import com.google.protobuf.MessageLite;
 
-import com.think.net.session.Session;
+import com.think.core.net.session.Session;
 
 /**
  * 消息响应包装器
